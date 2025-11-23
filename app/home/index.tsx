@@ -27,22 +27,25 @@ const HomeScreen = () => {
       <View className="mt-3 pb-10" style={{ paddingTop: safeArea.top }}>
         <Text className="text-3xl font-bold px-4 mb-2">Movies App</Text>
         {/* Carousel Main Slideshow */}
-        <MainSlideshow movies={nowPlayingQuery.data ?? []} />
+        <MainSlideshow movies={nowPlayingQuery.data?.pages.flat() ?? []} />
 
         {/* Horizontal List Popular Movies */}
         <MovieHorizontalList
           title="Popular Movies"
-          movies={popularMoviesQuery.data ?? []}
+          movies={popularMoviesQuery.data?.pages.flat() ?? []}
+          loadMoreMovies={popularMoviesQuery.fetchNextPage}
         />
         {/* Horizontal List Top Rated Movies */}
         <MovieHorizontalList
           title="Top Rated Movies"
-          movies={topRatedMoviesQuery.data ?? []}
+          movies={topRatedMoviesQuery.data?.pages.flat() ?? []}
+          loadMoreMovies={topRatedMoviesQuery.fetchNextPage}
         />
         {/* Horizontal List Upcoming Movies */}
         <MovieHorizontalList
           title="Upcoming Movies"
-          movies={upcomingMoviesQuery.data ?? []}
+          movies={upcomingMoviesQuery.data?.pages.flat() ?? []}
+          loadMoreMovies={upcomingMoviesQuery.fetchNextPage}
         />
       </View>
     </ScrollView>
